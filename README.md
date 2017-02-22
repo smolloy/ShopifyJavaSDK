@@ -8,6 +8,14 @@ It is able to slow down the calls per second in response to the X-Shopify-Shop-A
 The client uses the rest-easy "proxy" client - the services are defined as interfaces with JAX-RS annotation, and are runtime-interpreted into a function you can call and returns a strongly-typed object.  See more about this here: https://docs.jboss.org/resteasy/docs/3.1.0.Final/userguide/html/RESTEasy_Client_Framework.html#d4e2297
 
 # How do I use this thing??
+First, this client is not (yet) published into Maven Central Repo, so you'll have to download the source to include it in your project as a dependency.  Once you have it downloaded and compiling in your IDE, you can add this to the <dependencies> section of your pom.xml:
+```xml
+<dependency>
+  <groupId>com.shopify</groupId>
+	<artifactId>java-api-client</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
 To use the client, simply create a client like this in your code:
 ```java
 com.shopify.api.common.Credential creds = new Credential("your-api-key", "your-shared-secret", "your-shopname", "your-password");
