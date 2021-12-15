@@ -4,7 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import com.shopify.api.common.AbstractShopifyResource;
+import com.shopify.api.common.ShopifyResource;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Setter;
 
@@ -14,7 +14,7 @@ import lombok.Setter;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("province")
-public class Province extends AbstractShopifyResource {
+public class Province extends ShopifyResource {
     private String code;
     private String name;
     private double tax;

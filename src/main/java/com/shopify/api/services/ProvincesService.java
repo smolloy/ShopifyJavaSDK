@@ -27,7 +27,7 @@ public interface ProvincesService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Province.class)
 	@JsonRootName("provinces")
-	class ProvinceList extends ArrayList<Province> {}
+	public static class ProvinceList extends ArrayList<Province> {}
 	
     @GET @Path(".json")
     ProvinceList getProvinces();

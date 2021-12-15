@@ -28,7 +28,7 @@ public interface FulfillmentsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Fulfillment.class)
 	@JsonRootName("fulfillments")
-	class FulfillmentList extends ArrayList<Fulfillment> {}
+	public static class FulfillmentList extends ArrayList<Fulfillment> {}
 	
     @GET @Path(".json")
     FulfillmentList getFulfillments(@PathParam("orderId") Long orderId);

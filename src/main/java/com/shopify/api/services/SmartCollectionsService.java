@@ -28,7 +28,7 @@ public interface SmartCollectionsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=SmartCollection.class)
 	@JsonRootName("smart_collections")
-	class SmartCollectionList extends ArrayList<SmartCollection> {}
+	public static class SmartCollectionList extends ArrayList<SmartCollection> {}
 	
     @GET @Path(".json")
     SmartCollectionList getSmartCollections();

@@ -27,7 +27,7 @@ public interface ThemesService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Theme.class)
 	@JsonRootName("themes")
-	class ThemeList extends ArrayList<Theme> {}
+	public static class ThemeList extends ArrayList<Theme> {}
 	
     @GET @Path(".json")
     ThemeList getThemes();

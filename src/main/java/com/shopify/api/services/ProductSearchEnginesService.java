@@ -27,7 +27,7 @@ public interface ProductSearchEnginesService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=ProductSearchEngine.class)
 	@JsonRootName("product_search_engines")
-	class ProductSearchEngineList extends ArrayList<ProductSearchEngine> {}
+	public static class ProductSearchEngineList extends ArrayList<ProductSearchEngine> {}
 	
     @GET @Path(".json")
     ProductSearchEngineList getProductSearchEngines();

@@ -28,7 +28,7 @@ public interface CommentsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Comment.class)
 	@JsonRootName("comments")
-	class CommentList extends ArrayList<Comment> {}
+	public static class CommentList extends ArrayList<Comment> {}
 	
     @GET @Path(".json")
     CommentList getComments();

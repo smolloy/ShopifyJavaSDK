@@ -10,7 +10,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 
-import com.shopify.api.common.AbstractShopifyResource;
+import com.shopify.api.common.ShopifyResource;
 
 @Getter
 @Setter
@@ -18,7 +18,7 @@ import com.shopify.api.common.AbstractShopifyResource;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("fulfillment")
-public class Fulfillment extends AbstractShopifyResource {
+public class Fulfillment extends ShopifyResource {
     private List<LineItem> lineItems;
     private Long orderId;
     private Receipt receipt;

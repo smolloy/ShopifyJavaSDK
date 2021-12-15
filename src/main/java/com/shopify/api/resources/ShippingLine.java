@@ -1,10 +1,10 @@
 package com.shopify.api.resources;
 
-import com.shopify.api.common.AbstractShopifyResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import com.shopify.api.common.ShopifyResource;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Setter;
 
@@ -14,7 +14,7 @@ import lombok.Setter;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("shipping_line")
-public class ShippingLine extends AbstractShopifyResource {
+public class ShippingLine extends ShopifyResource {
     private String code;
     private String price;
     private String title;

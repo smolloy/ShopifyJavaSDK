@@ -1,10 +1,10 @@
 package com.shopify.api.resources;
 
-import com.shopify.api.common.AbstractShopifyResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import com.shopify.api.common.ShopifyResource;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("smart_collection")
-public class SmartCollection extends AbstractShopifyResource {
+public class SmartCollection extends ShopifyResource {
     private String bodyHtml;
     private String handle;
     private String publishedAt;

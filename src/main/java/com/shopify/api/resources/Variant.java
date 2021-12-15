@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import com.shopify.api.common.AbstractShopifyResource;
+import com.shopify.api.common.ShopifyResource;
 
 @Getter
 @Setter
@@ -18,7 +18,7 @@ import com.shopify.api.common.AbstractShopifyResource;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("variant")
-public class Variant extends AbstractShopifyResource {
+public class Variant extends ShopifyResource {
     private long productId;
     private String compareAtPrice;
     private String fulfillmentService;

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import com.shopify.api.common.BadShopifyRequest;
 import com.shopify.api.common.BaseShopifyService;
 import com.shopify.api.common.Credential;
@@ -19,12 +21,16 @@ import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.client.ClientResponseContext;
 import javax.ws.rs.client.ClientResponseFilter;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 public class ShopifyClient {
@@ -39,6 +45,52 @@ public class ShopifyClient {
 				req.setUri(new URI(req.getUri().toString().replace("/.", ".").replace(".json%3F", ".json?"))); 
 			} catch (URISyntaxException e) {
 				throw new RuntimeException(e);
+			}
+		}
+	}
+
+	@Provider
+	public static class LinkHeaderSplitter implements ClientResponseFilter {
+		@Override
+		public void filter(ClientRequestContext requestContext, ClientResponseContext responseContext) throws IOException {
+			MultivaluedMap<String, String> headers = responseContext.getHeaders();
+			if(headers.containsKey("Link")){
+				// so shopify combines their Link headers with a comma (which is allowed)
+				// but resteasy doesn't understand this, and so we have to split them into separate
+				// "Link" header entries for RestEasy to find them correctly.
+				// see: org.jboss.resteasy.specimpl.AbstractBuiltResponse.LinkHeaders.addLinkObjects
+				headers.replaceAll((key, values) -> {
+					if("Link".equalsIgnoreCase(key)){
+						return values.stream().flatMap(originalLink -> {
+							if(originalLink.contains(",")) {
+								// split it and put it back in
+								return Stream.of(
+									Iterables.toArray(
+										Splitter.on(",")
+											.omitEmptyStrings()
+											.trimResults()
+											.split(originalLink),
+										String.class
+									)
+								);
+							} else {
+								return Stream.of(originalLink);
+							}
+						}).collect(Collectors.toList());
+					}
+
+					return values; // leave it untouched
+				});
+
+				if(headers.get("Link").size()==1){
+					String originalLink = headers.getFirst("Link");
+					headers.remove("Link");
+
+					// split it and put it back in
+					Arrays.stream(originalLink.split(",")).sequential().forEach(splitLink -> {
+						headers.add("Link", splitLink);
+					});
+				}
 			}
 		}
 	}
@@ -157,7 +209,8 @@ public class ShopifyClient {
 			.register(new JacksonContextResolver())
 			.register(new BasicAuthentication(username, password))
 			.register(FunkyPathFixer.class)
-			.register(ApiCallThrottler.class) 
+			.register(LinkHeaderSplitter.class)
+			.register(ApiCallThrottler.class)
 			.register(ApiCallThrottleFeedback.class)
 
 			.establishConnectionTimeout(5000, TimeUnit.MILLISECONDS)

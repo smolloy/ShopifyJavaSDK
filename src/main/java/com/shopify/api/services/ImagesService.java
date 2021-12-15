@@ -28,7 +28,7 @@ public interface ImagesService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Image.class)
 	@JsonRootName("images")
-	class ImageList extends ArrayList<Image> {}
+	public static class ImageList extends ArrayList<Image> {}
 	
     @GET @Path(".json")
     ImageList getImages(@PathParam("productId") long productId);

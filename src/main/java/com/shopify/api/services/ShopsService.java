@@ -27,7 +27,7 @@ public interface ShopsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Shop.class)
 	@JsonRootName("shops")
-	class ShopList extends ArrayList<Shop> {}
+	public static class ShopList extends ArrayList<Shop> {}
 	
     @GET @Path(".json")
     ShopList getShops();

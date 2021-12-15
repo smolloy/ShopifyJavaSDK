@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import com.shopify.api.common.AbstractShopifyResource;
+import com.shopify.api.common.ShopifyResource;
 import lombok.Setter;
 
 @Getter
@@ -14,7 +14,7 @@ import lombok.Setter;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("blog")
-public class Blog extends AbstractShopifyResource {
+public class Blog extends ShopifyResource {
     private String commentable;
     private String feedburner;
     private String feedburnerLocation;

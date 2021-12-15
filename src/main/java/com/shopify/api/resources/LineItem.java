@@ -1,6 +1,5 @@
 package com.shopify.api.resources;
 
-import com.shopify.api.common.AbstractShopifyResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,13 +8,15 @@ import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import com.shopify.api.common.ShopifyResource;
+
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("line_item")
-public class LineItem extends AbstractShopifyResource {
+public class LineItem extends ShopifyResource {
     private String fulfillmentService;
     private String fulfillmentStatus;
     private Long grams;

@@ -28,7 +28,7 @@ public interface RedirectsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Redirect.class)
 	@JsonRootName("redirects")
-	class RedirectList extends ArrayList<Redirect> {}
+	public static class RedirectList extends ArrayList<Redirect> {}
 	
     @GET @Path(".json")
     RedirectList getRedirects();

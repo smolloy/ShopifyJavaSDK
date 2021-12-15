@@ -27,7 +27,7 @@ public interface TransactionsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Transaction.class)
 	@JsonRootName("transactions")
-	class TransactionList extends ArrayList<Transaction> {}
+	public static class TransactionList extends ArrayList<Transaction> {}
 	
     @GET @Path(".json")
     TransactionList getTransactions();

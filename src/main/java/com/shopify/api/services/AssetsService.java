@@ -28,7 +28,7 @@ public interface AssetsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Asset.class)
 	@JsonRootName("assets")
-	class AssetList extends ArrayList<Asset> {}
+	public static class AssetList extends ArrayList<Asset> {}
 	
     @GET @Path(".json")
     AssetList getAssets();

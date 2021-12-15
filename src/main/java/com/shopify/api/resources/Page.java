@@ -1,10 +1,10 @@
 package com.shopify.api.resources;
 
-import com.shopify.api.common.AbstractShopifyResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import com.shopify.api.common.ShopifyResource;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Setter;
 
@@ -14,7 +14,7 @@ import lombok.Setter;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("page")
-public class Page extends AbstractShopifyResource {
+public class Page extends ShopifyResource {
     private String author;
     private String bodyHtml;
     private String handle;

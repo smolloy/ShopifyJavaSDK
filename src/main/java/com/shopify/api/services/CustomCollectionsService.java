@@ -2,39 +2,73 @@
 
 package com.shopify.api.services;
 
+import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.shopify.api.client.ShopifyClient;
 import com.shopify.api.common.BaseShopifyService;
 import com.shopify.api.resources.CustomCollection;
+import lombok.Data;
+import lombok.experimental.Accessors;
+import org.jboss.resteasy.annotations.*;
 
 
 @Path("/admin/custom_collections")
 @Consumes("application/json") @Produces("application/json")
 public interface CustomCollectionsService extends BaseShopifyService {
 
+    @ResponseObject
+    public interface PaginatedResponse {
+        @Body
+        CustomCollectionList list();
+
+        @Status
+        int status();
+
+        @LinkHeaderParam(rel = "next")
+        URI nextPage();
+
+        @LinkHeaderParam(rel = "previous")
+        URI previousPage();
+
+        @GET
+        @LinkHeaderParam(rel = "next")
+        PaginatedResponse getNextPage();
+
+        @GET
+        @LinkHeaderParam(rel = "previous")
+        PaginatedResponse getPreviousPage();
+    }
+
+
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=CustomCollection.class)
 	@JsonRootName("custom_collections")
-	class CustomCollectionList extends ArrayList<CustomCollection> {}
+	public static class CustomCollectionList extends ArrayList<CustomCollection> {}
 	
     @GET @Path(".json")
-    CustomCollectionList getCustomCollections();
+    PaginatedResponse getCustomCollections();
 
-    @GET @Path(".json?{query}")
-    CustomCollectionList getCustomCollections(@PathParam("query") String queryParams);
+    @Data
+    @Accessors(chain = true)
+    public static class Args {
+        @QueryParam("title") String title;
+        @QueryParam("product_id") String productId;
+        @QueryParam("handle") String handle;
+        @QueryParam("published_status") String publishedStatus;
+        @QueryParam("limit") int limit = 100;
+    }
+
+    @GET @Path(".json")
+    PaginatedResponse getCustomCollections(@Form Args arguments);
     
     @GET @Path("{id}.json")
     CustomCollection getCustomCollection(@PathParam("id") long id);

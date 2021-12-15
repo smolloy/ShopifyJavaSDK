@@ -28,7 +28,7 @@ public interface CollectsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Collect.class)
 	@JsonRootName("collects")
-	class CollectList extends ArrayList<Collect> {}
+	public static class CollectList extends ArrayList<Collect> {}
 	
     @GET @Path(".json")
     CollectList getCollects();

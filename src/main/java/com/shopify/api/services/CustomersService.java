@@ -28,7 +28,7 @@ public interface CustomersService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Customer.class)
 	@JsonRootName("customers")
-	class CustomerList extends ArrayList<Customer> {}
+	public static class CustomerList extends ArrayList<Customer> {}
 	
     @GET @Path(".json")
     CustomerList getCustomers();

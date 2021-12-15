@@ -1,11 +1,13 @@
 package com.shopify.api.resources;
 
-import com.shopify.api.common.AbstractShopifyResource;
 import lombok.*;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
+
+import com.shopify.api.common.ShopifyResource;
 
 @Getter
 @Setter
@@ -13,7 +15,8 @@ import org.joda.time.DateTime;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("custom_collection")
-public class CustomCollection extends AbstractShopifyResource {
+@Slf4j
+public class CustomCollection extends ShopifyResource {
     private String bodyHtml;
     private String handle;
     private String publishedScope;
@@ -23,10 +26,11 @@ public class CustomCollection extends AbstractShopifyResource {
     private String title;
 
     public boolean isPublished() {
-        return "global".equalsIgnoreCase(publishedScope) && publishedAt != null;
+        // log.info("published scope for collection {} is {}", id, publishedScope);
+        return "web".equalsIgnoreCase(publishedScope) && publishedAt != null;
     }
 
     public CustomCollection setPublished(boolean publish) {
-        return setPublishedScope(publish ? "global" : "none").setPublishedAt(publish ? DateTime.now() : null);
+        return setPublishedScope(publish ? "web" : "none").setPublishedAt(publish ? DateTime.now() : null);
     }
 }

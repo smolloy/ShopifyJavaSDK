@@ -28,7 +28,7 @@ public interface EventsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Event.class)
 	@JsonRootName("events")
-	class EventList extends ArrayList<Event> {}
+	public static class EventList extends ArrayList<Event> {}
 	
     @GET @Path(".json")
     EventList getEvents();

@@ -28,7 +28,7 @@ public interface ScriptTagsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=ScriptTag.class)
 	@JsonRootName("script_tags")
-	class ScriptTagList extends ArrayList<ScriptTag> {}
+	public static class ScriptTagList extends ArrayList<ScriptTag> {}
 	
     @GET @Path(".json")
     ScriptTagList getScriptTags();

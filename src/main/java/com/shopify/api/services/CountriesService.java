@@ -28,7 +28,7 @@ public interface CountriesService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Country.class)
 	@JsonRootName("countries")
-	class CountryList extends ArrayList<Country> {}
+	public static class CountryList extends ArrayList<Country> {}
 	
     @GET @Path(".json")
     CountryList getCountries();

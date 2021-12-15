@@ -28,7 +28,7 @@ public interface ArticlesService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Article.class)
 	@JsonRootName("articles")
-	class ArticleList extends ArrayList<Article> {}
+	public static class ArticleList extends ArrayList<Article> {}
 	
     @GET @Path(".json")
     ArticleList getArticles();

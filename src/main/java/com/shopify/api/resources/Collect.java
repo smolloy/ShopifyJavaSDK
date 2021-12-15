@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import com.shopify.api.common.AbstractShopifyResource;
+import com.shopify.api.common.ShopifyResource;
 
 @Getter
 @Setter
@@ -16,7 +16,7 @@ import com.shopify.api.common.AbstractShopifyResource;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("collect")
-public class Collect extends AbstractShopifyResource {
+public class Collect extends ShopifyResource {
     private Long collectionId;
     private Boolean featured;
     private Long position;

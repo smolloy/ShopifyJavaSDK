@@ -1,5 +1,9 @@
 package com.shopify.api.common;
 
+import lombok.SneakyThrows;
+
+import java.util.Properties;
+
 public class Credential {
 	
 	private String shopName;
@@ -16,6 +20,18 @@ public class Credential {
 		this.sharedSecret = sharedSecret;
 		this.shopName = shopName;
 		this.password = password;
+	}
+
+	@SneakyThrows
+	public static Credential fromDefaultProperties(){
+		Properties props = new Properties();
+		props.load(Credential.class.getClassLoader().getResourceAsStream("shopify.properties"));
+		return new Credential(
+				props.getProperty("shopify.apiKey"),
+				props.getProperty("shopify.sharedSecret"),
+				props.getProperty("shopify.shopName"),
+				props.getProperty("shopify.apiPassword")
+		);
 	}
 	
 	// Beans nead null constructors

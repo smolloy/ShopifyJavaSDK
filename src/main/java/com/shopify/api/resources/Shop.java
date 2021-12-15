@@ -9,7 +9,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 
-import com.shopify.api.common.AbstractShopifyResource;
+import com.shopify.api.common.ShopifyResource;
 
 @Getter
 @Setter
@@ -17,7 +17,7 @@ import com.shopify.api.common.AbstractShopifyResource;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @JsonRootName("shop")
-public class Shop extends AbstractShopifyResource {
+public class Shop extends ShopifyResource {
     private String address1;
     private String city;
     private String country;

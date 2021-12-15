@@ -28,7 +28,7 @@ public interface MetafieldsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Metafield.class)
 	@JsonRootName("metafields")
-	class MetafieldList extends ArrayList<Metafield> {}
+	public static class MetafieldList extends ArrayList<Metafield> {}
 	
     @GET @Path(".json")
     MetafieldList getMetafields();

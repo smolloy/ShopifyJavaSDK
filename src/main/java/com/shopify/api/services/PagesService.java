@@ -28,7 +28,7 @@ public interface PagesService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Page.class)
 	@JsonRootName("pages")
-	class PageList extends ArrayList<Page> {}
+	public static class PageList extends ArrayList<Page> {}
 	
     @GET @Path(".json")
     PageList getPages();

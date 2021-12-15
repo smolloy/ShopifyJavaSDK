@@ -28,7 +28,7 @@ public interface WebhooksService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=Webhook.class)
 	@JsonRootName("webhooks")
-	class WebhookList extends ArrayList<Webhook> {}
+	public static class WebhookList extends ArrayList<Webhook> {}
 	
     @GET @Path(".json")
     WebhookList getWebhooks();

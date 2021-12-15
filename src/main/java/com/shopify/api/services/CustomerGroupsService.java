@@ -28,7 +28,7 @@ public interface CustomerGroupsService extends BaseShopifyService {
 	@SuppressWarnings("serial")
 	@JsonDeserialize(contentAs=CustomerGroup.class)
 	@JsonRootName("customer_groups")
-	class CustomerGroupList extends ArrayList<CustomerGroup> {}
+	public static class CustomerGroupList extends ArrayList<CustomerGroup> {}
 	
     @GET @Path(".json")
     CustomerGroupList getCustomerGroups();
